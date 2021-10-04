@@ -16,23 +16,14 @@
  * F -> - L+F*F+L * L+F*F+L - L+F*F+L *
  */
 
-let n = 1;
-let step = 1;
+let level = 1;
 let length = 200;
-let minLength = 10;
-let maxN = 0;
-let setN = 2;
+let maxLevel = 2;
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     background(0);
     angleMode(DEGREES);
-
-    let calculatedLength = length;
-    while (calculatedLength >= minLength) {
-        maxN++;
-        calculatedLength /= 3.4142;
-    }
 }
 
 function draw() {
@@ -42,22 +33,11 @@ function draw() {
 
     push();
     translate(width / 2 + length, height / 2 + length);
-    for (let k = 1; k <= setN; k++) {
+    for (let k = 1; k <= maxLevel; k++) {
         for (let i = 0; i < 4; i++) {
-            let color1 = lerpColor(colors[(i + 2) % 4], colors[(i + 3) % 4], 0);
-            let color2 = lerpColor(colors[(i + 2) % 4], colors[(i + 3) % 4], 0.3333);
-            let color3 = lerpColor(colors[(i + 2) % 4], colors[(i + 3) % 4], 0.6666);
-            let color4 = lerpColor(colors[(i + 2) % 4], colors[(i + 3) % 4], 1);
-
-            rotate(45);
-            drawWindmill(0, 0, length / 2.4142, 270, n + 1, k, color1, color2);
-            translate(0, length);
             rotate(90);
-            drawWindmill(0, 0, length / 2.4142, 270, n + 1, k, color2, color3);
-            translate(0, length);
-            rotate(-45);
-            drawWindmill(0, 0, length / 2.4142, 270, n + 1, k, color3, color4);
-            translate(0, length);
+            drawWindmill(0, 0, length, 270, level + 1, k, colors[(i + 2) % 4], colors[(i + 3) % 4]);
+            translate(0, length * 2.4142);
         }
     }
 
@@ -99,14 +79,14 @@ function drawWindmill(x, y, l, r, step, max, c1, c2) {
 }
 
 function mouseWheel(event) {
-    print(event.delta);
     if (event.delta > 0) {
-        if (setN < 7) {
-            setN++;
+        if (maxLevel < 8) {
+            maxLevel++;
         }
     } else if (event.delta < 0) {
-        if (setN > 2) {
-            setN--;
+        if (maxLevel > 2) {
+            maxLevel--;
         }
     }
+    print(maxLevel);
 }
