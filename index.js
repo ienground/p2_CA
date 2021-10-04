@@ -4,16 +4,11 @@
  * on github.com/ienground
  *
  * L-System
- * Symbol : F, L, *, +
+ * Symbol :
  * F : Draw forward by 1 unit
- * L : Draw forward by sqrt(2) unit
+ * + : Turn left by 45 degrees
  * * : Turn right by 90 degrees
- * + : Turn right by 135 degrees
- * - : Turn left by 45 degrees
- * [ : Save current position and angle
- * ] : Restore position and angle stored at correspoinding [
- * L -> - L+F*F+L * L+F*F+L - L+F*F+L *
- * F -> - L+F*F+L * L+F*F+L - L+F*F+L *
+ * Rules : [ F -> +F*F+F ]* 4 times
  */
 
 let level = 1;
